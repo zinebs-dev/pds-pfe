@@ -1,0 +1,72 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "rebuilt_french": {
+          "tokenizer": "standard",
+          "filter": ["lowercase", "french_elision", "french_stemmer"]
+        }
+      },
+      "filter": {
+        "french_elision": {
+          "type": "elision",
+          "articles_case": true,
+          "articles": ["l", "m", "t", "qu", "n", "s", "j", "d"]
+        },
+        "french_stemmer": {
+          "type": "stemmer",
+          "language": "light_french"
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "titre": {
+        "type": "text",
+        "analyzer": "rebuilt_french",
+        "fields": {
+          "keyword": { "type": "keyword", "ignore_above": 256 }
+        }
+      },
+      "pdf_url": { "type": "keyword", "ignore_above": 1024 },
+      "author": {
+        "type": "text",
+        "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } },
+        "analyzer": "rebuilt_french"
+      },
+      "specialty": {
+        "type": "text",
+        "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } },
+        "analyzer": "rebuilt_french"
+      },
+      "abstract": {
+        "type": "text",
+        "analyzer": "rebuilt_french"
+      },
+      "table_of_contents": {
+        "properties": {
+          "chapitres": {
+            "type": "nested",
+            "properties": {
+              "titre": { "type": "text", "analyzer": "rebuilt_french", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+              "numero": { "type": "keyword" },
+              "sous_titres": { "type": "text", "analyzer": "rebuilt_french" }
+            }
+          }
+        }
+      },
+      "general_introduction": { "type": "text", "analyzer": "rebuilt_french" },
+      "general_conclusion": { "type": "text", "analyzer": "rebuilt_french" },
+      "chapters": {
+        "type": "nested",
+        "properties": {
+          "titre": { "type": "text", "analyzer": "rebuilt_french", "fields": { "keyword": { "type": "keyword", "ignore_above": 256 } } },
+          "contenu": { "type": "text", "analyzer": "rebuilt_french" }
+        }
+      },
+      "extraction_date": { "type": "date", "format": "strict_date_optional_time||epoch_millis" },
+      "_source_len": { "type": "integer" }
+    }
+  }
+}

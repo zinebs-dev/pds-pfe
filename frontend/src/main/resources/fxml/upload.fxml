@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pds.pfe.ui.controllers.DashboardController"
+            stylesheets="@../styles.css"
+            prefWidth="1200" prefHeight="700"
+            minWidth="900" minHeight="600">
+
+    <!-- BARRE LATÉRALE GAUCHE - MENU -->
+    <left>
+        <VBox fx:id="sidebarContainer" styleClass="sidebar-container" prefWidth="280" minWidth="250" maxWidth="300">
+            <padding>
+                <Insets top="20.0" bottom="20.0" left="15.0" right="15.0" />
+            </padding>
+
+            <!-- Bouton toggle sidebar dans le menu -->
+            <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+
+                <Button fx:id="toggleSidebarButton" text="☰" onAction="#handleToggleSidebar"
+                        styleClass="toggle-sidebar-button-in-menu">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </HBox>
+
+            <!-- Logo et titre Menu -->
+            <VBox fx:id="sidebarTopSection" alignment="CENTER" spacing="15.0" styleClass="sidebar-top-section">
+                <VBox.margin>
+                    <Insets bottom="20.0" />
+                </VBox.margin>
+
+                <!-- Logo utilisateur centré -->
+                <ImageView fx:id="sidebarLogo" fitWidth="120" fitHeight="120" preserveRatio="true" styleClass="sidebar-logo">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+            </VBox>
+
+            <!-- Séparateur -->
+            <Region fx:id="sidebarSeparator1" styleClass="sidebar-separator">
+                <VBox.margin>
+                    <Insets top="5.0" bottom="15.0" />
+                </VBox.margin>
+            </Region>
+
+            <!-- Bouton Nouvelle Analyse -->
+            <Button fx:id="newAnalysisButton" text="➕ Nouvelle Analyse" onAction="#handleNewAnalysis"
+                    styleClass="new-analysis-button" maxWidth="Infinity">
+                <VBox.margin>
+                    <Insets bottom="15.0" />
+                </VBox.margin>
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </Button>
+
+            <!-- Titre Historique -->
+            <HBox fx:id="sidebarHistoryHeader" alignment="CENTER_LEFT" spacing="10.0" styleClass="sidebar-header">
+                <VBox.margin>
+                    <Insets bottom="15.0" />
+                </VBox.margin>
+
+                <Label text="📋" styleClass="sidebar-icon">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+
+                <Label fx:id="sidebarHistoryTitle" text="Historique" styleClass="sidebar-title">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            </HBox>
+
+            <!-- Liste de l'historique -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                        styleClass="history-scroll" VBox.vgrow="ALWAYS">
+                <VBox fx:id="historyContainer" spacing="10.0" styleClass="history-list">
+                    <padding>
+                        <Insets top="5.0" bottom="5.0" left="5.0" right="5.0" />
+                    </padding>
+
+                    <!-- Le contenu sera ajouté dynamiquement -->
+                    <Label text="Aucun historique" styleClass="empty-history-label"
+                           fx:id="emptyHistoryLabel" visible="true">
+                        <font>
+                            <Font size="13.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </ScrollPane>
+
+            <!-- Boutons en bas de la sidebar -->
+            <VBox spacing="10.0">
+                <VBox.margin>
+                    <Insets top="15.0" />
+                </VBox.margin>
+
+                <!-- Bouton pour basculer mode sombre/clair -->
+                <Button fx:id="darkModeButton" text="🌙 Mode Sombre" onAction="#handleToggleDarkMode"
+                        styleClass="dark-mode-button" maxWidth="Infinity">
+                    <font>
+                        <Font size="12.0" />
+                    </font>
+                </Button>
+                <!-- Bouton Déconnexion -->
+                <Button text="🚪 Se déconnecter" onAction="#handleLogout"
+                        styleClass="sidebar-logout-button" maxWidth="Infinity">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Button>
+            </VBox>
+        </VBox>
+    </left>
+
+    <!-- CONTENU PRINCIPAL (CENTRE) - AVEC SCROLL GLOBAL -->
+    <center>
+        <VBox>
+            <!-- Bouton toggle sidebar (quand menu fermé) et message de bienvenue -->
+            <HBox alignment="CENTER_LEFT" spacing="15.0" styleClass="top-bar">
+                <padding>
+                    <Insets top="15.0" bottom="10.0" left="20.0" right="20.0" />
+                </padding>
+
+                <Button fx:id="toggleSidebarButtonOutside" text="☰" onAction="#handleToggleSidebar"
+                        styleClass="toggle-sidebar-button" visible="false" managed="false">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Button>
+
+
+                <!-- Message de bienvenue -->
+                <Label fx:id="welcomeMessageLabel" text="Bienvenue" styleClass="welcome-message">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            </HBox>
+
+            <ScrollPane fitToWidth="true" fitToHeight="true"
+                        hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                        styleClass="main-scroll-pane"
+                        VBox.vgrow="ALWAYS">
+                <VBox alignment="TOP_CENTER" spacing="20.0" styleClass="main-container"
+                      fillWidth="true">
+                    <padding>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
+                    </padding>
+
+                    <!-- Conteneur principal avec effet de carte -->
+                    <VBox alignment="CENTER" spacing="20.0"
+                          styleClass="main-card-container"
+                          minWidth="400" maxWidth="900">
+
+                        <!-- Titres -->
+                        <VBox alignment="CENTER" spacing="10.0">
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+
+                            <Label text="PDS-PFE" styleClass="main-title"
+                                   wrapText="true" maxWidth="Infinity">
+                                <font>
+                                    <Font size="34.0" />
+                            </font>
+                        </Label>
+
+                        <Label text="Évaluez l'originalité de vos documents : analyse de similarité, détection de plagiat et recommandations personnalisées"
+                               styleClass="subtitle" wrapText="true" maxWidth="Infinity">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+
+                    <!-- Ligne décorative -->
+                    <Rectangle width="100" height="4" styleClass="decorative-line">
+                        <VBox.margin>
+                            <Insets top="5.0" bottom="5.0" />
+                        </VBox.margin>
+                    </Rectangle>
+
+                    <!-- Section d'actions -->
+                    <VBox alignment="CENTER" spacing="18.0"
+                          styleClass="actions-section-box"
+                          minWidth="350" maxWidth="600">
+                        <VBox.margin>
+                            <Insets top="10.0" bottom="10.0" />
+                        </VBox.margin>
+
+                        <!-- Bouton Import -->
+                        <Button fx:id="importButton"
+                                text="📁  Importer un fichier"
+                                onAction="#handleImportFile"
+                                styleClass="import-button"
+                                maxWidth="Infinity"
+                                minWidth="250">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Button>
+
+                        <!-- Label du fichier sélectionné -->
+                        <Label fx:id="fileLabel" text=""
+                               styleClass="file-selected-label"
+                               visible="false"
+                               maxWidth="Infinity"
+                               wrapText="true">
+                            <VBox.margin>
+                                <Insets top="-8.0" />
+                            </VBox.margin>
+                        </Label>
+
+                        <!-- Bouton Envoyer -->
+                        <Button fx:id="sendButton" text="Envoyer ➔"
+                                onAction="#handleSend"
+                                styleClass="send-button"
+                                maxWidth="Infinity"
+                                minWidth="250"
+                                disable="true">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                    </VBox>
+
+                    <!-- Barre de progression -->
+                    <VBox alignment="CENTER" spacing="10.0" maxWidth="600">
+                        <VBox.margin>
+                            <Insets top="5.0" />
+                        </VBox.margin>
+
+                        <ProgressBar fx:id="progressBar" progress="0.0"
+                                     visible="false"
+                                     styleClass="modern-progress-bar"
+                                     maxWidth="Infinity"
+                                     minWidth="250"/>
+
+                        <Label fx:id="progressLabel" visible="false"
+                               styleClass="progress-label-text"
+                               wrapText="true" maxWidth="Infinity">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                </VBox>
+
+                <!-- Conteneur des résultats - PREND MAINTENANT TOUTE LA LARGEUR ET HAUTEUR -->
+                <VBox fx:id="resultsContainer" alignment="TOP_LEFT" spacing="0"
+                      styleClass="results-report-container"
+                      visible="false"
+                      maxWidth="Infinity"
+                      VBox.vgrow="ALWAYS">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets top="20.0" bottom="20.0" left="20.0" right="20.0" />
+                    </padding>
+                    <!-- Le contenu sera généré dynamiquement par le contrôleur -->
+                </VBox>
+
+                    <!-- Footer discret -->
+                    <Label text="© 2025 PDS-PFE - Tous droits réservés"
+                           styleClass="footer-label"
+                           wrapText="true" maxWidth="Infinity">
+                        <VBox.margin>
+                            <Insets top="10.0" bottom="5.0" />
+                        </VBox.margin>
+                    </Label>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>

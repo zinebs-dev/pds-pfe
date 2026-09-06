@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<StackPane xmlns="http://javafx.com/javafx/11.0.1"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.pds.pfe.ui.controllers.LoginController"
+           stylesheets="@../styles.css"
+           prefWidth="800" prefHeight="600"
+           style="-fx-background-color: #f0f2f5;">
+
+    <Circle radius="120" opacity="0.8" translateX="-350" translateY="-250">
+        <fill>
+            <LinearGradient startX="0.0" startY="0.0" endX="1.0" endY="1.0">
+                <stops>
+                    <Stop color="#a0c4ff" offset="0.0"/>
+                    <Stop color="#6a85b6" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+    <Circle radius="80" opacity="0.6" translateX="-280" translateY="-180">
+        <fill>
+            <LinearGradient startX="1.0" startY="1.0" endX="0.0" endY="0.0">
+                <stops>
+                    <Stop color="#b39ddb" offset="0.0"/>
+                    <Stop color="#7e57c2" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+
+    <Circle radius="100" opacity="0.7" translateX="350" translateY="-220">
+        <fill>
+            <LinearGradient startX="0.5" startY="0.0" endX="0.5" endY="1.0">
+                <stops>
+                    <Stop color="#81d4fa" offset="0.0"/>
+                    <Stop color="#0288d1" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+    <Circle radius="130" opacity="0.5" translateX="280" translateY="-150">
+        <fill>
+            <LinearGradient startX="0.0" startY="1.0" endX="1.0" endY="0.0">
+                <stops>
+                    <Stop color="#9fa8da" offset="0.0"/>
+                    <Stop color="#5c6bc0" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+
+    <Circle radius="110" opacity="0.7" translateX="-320" translateY="200">
+        <fill>
+            <LinearGradient startX="0.0" startY="0.0" endX="1.0" endY="1.0">
+                <stops>
+                    <Stop color="#90caf9" offset="0.0"/>
+                    <Stop color="#42a5f5" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+
+    <Circle radius="140" opacity="0.6" translateX="300" translateY="250">
+        <fill>
+            <LinearGradient startX="1.0" startY="0.0" endX="0.0" endY="1.0">
+                <stops>
+                    <Stop color="#ce93d8" offset="0.0"/>
+                    <Stop color="#ab47bc" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+    <Circle radius="90" opacity="0.8" translateX="380" translateY="180">
+        <fill>
+            <LinearGradient startX="0.0" startY="1.0" endX="1.0" endY="0.0">
+                <stops>
+                    <Stop color="#80deea" offset="0.0"/>
+                    <Stop color="#26c6da" offset="1.0"/>
+                </stops>
+            </LinearGradient>
+        </fill>
+    </Circle>
+
+    <SVGPath content="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z"
+             fill="WHITE" scaleX="1.5" scaleY="1.5" translateX="350" translateY="220">
+        <effect>
+            <DropShadow color="WHITE" radius="10" spread="0.5"/>
+        </effect>
+    </SVGPath>
+
+
+    <VBox alignment="CENTER" spacing="25.0" maxWidth="450" maxHeight="550"
+          style="-fx-background-color: white; -fx-background-radius: 25; -fx-padding: 40;">
+
+        <effect>
+            <DropShadow color="#00000015" radius="40" offsetY="10" />
+        </effect>
+
+        <Label text="PDS-PFE" styleClass="main-title">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Label>
+
+        <Label text="Plateforme de détection de similarité entre rapports pfe" styleClass="subtitle" wrapText="true" textAlignment="CENTER"/>
+
+        <VBox alignment="CENTER" spacing="15.0">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+
+            <VBox spacing="8.0" alignment="CENTER_LEFT" maxWidth="280.0">
+                <Label text="Username :" styleClass="field-label" />
+                <TextField fx:id="usernameField" styleClass="text-field" promptText="Entrez votre nom d'utilisateur" />
+            </VBox>
+
+            <VBox spacing="8.0" alignment="CENTER_LEFT" maxWidth="280.0">
+                <Label text="Password :" styleClass="field-label" />
+                <PasswordField fx:id="passwordField"  styleClass="text-field" promptText="Entrez votre mot de passe" />
+            </VBox>
+        </VBox>
+
+        <VBox alignment="CENTER" spacing="12.0">
+            <VBox.margin>
+                <Insets top="10.0" />
+            </VBox.margin>
+
+            <Button fx:id="loginButton" text="Login" onAction="#handleLogin" styleClass="primary-button" />
+            <Button text="s'inscrire" onAction="#showRegisterView" styleClass="secondary-button" />
+        </VBox>
+    </VBox>
+</StackPane>

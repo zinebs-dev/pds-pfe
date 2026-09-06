@@ -1,0 +1,21 @@
+# --- Cœur IA & Calcul ---
+torch==2.5.0
+transformers==4.46.2
+sentence-transformers==3.2.0
+# On force numpy < 2 pour éviter les incompatibilités de dernière minute
+numpy<2.0.0
+scikit-learn==1.5.2
+
+# --- Base de données & Recherche ---
+elasticsearch==8.15.1
+rank-bm25==0.2.2
+
+# --- Web API ---
+flask==3.1.0
+flask-cors==4.0.1
+requests==2.32.3
+
+# --- Traitement de Texte & PDF (CRITIQUE) ---
+pdfplumber==0.11.4
+nltk==3.9
+tokenizers==0.20.0

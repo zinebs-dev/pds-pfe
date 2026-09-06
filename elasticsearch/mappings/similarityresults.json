@@ -1,0 +1,74 @@
+{
+  "similarity_results" : {
+    "mappings" : {
+      "properties" : {
+        "algorithm_used" : {
+          "type" : "keyword"
+        },
+        "comparison_date" : {
+          "type" : "date"
+        },
+        "content_similarity" : {
+          "type" : "float"
+        },
+        "id" : {
+          "type" : "keyword"
+        },
+        "matched_keywords" : {
+          "type" : "keyword"
+        },
+        "metadata_similarity" : {
+          "type" : "float"
+        },
+        "semantic_similarity" : {
+          "type" : "float"
+        },
+        "similarity_score" : {
+          "type" : "float"
+        },
+        "source_document_id" : {
+          "type" : "keyword"
+        },
+        "target_document_id" : {
+          "type" : "keyword"
+        },
+        "top_matching_terms" : {
+          "type" : "text"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "filename": {
+          "type": "keyword"
+        },
+        "overall_similarity": {
+          "type": "float"
+        },
+        "section_similarities": {
+          "type": "object",
+          "enabled": true
+        },
+        "total_matches": {
+          "type": "integer"
+        },
+        "top_matches": {
+          "type": "nested",
+          "properties": {
+            "doc_id": {
+              "type": "keyword"
+            },
+            "title": {
+              "type": "text"
+            },
+            "similarity_score": {
+              "type": "float"
+            },
+            "risk_level": {
+              "type": "keyword"
+            }
+          }
+        }
+      }
+    }
+  }
+}

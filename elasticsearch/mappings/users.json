@@ -1,0 +1,29 @@
+{
+  "users" : {
+    "mappings" : {
+      "properties" : {
+        "created_at" : {
+          "type" : "date"
+        },
+        "email" : {
+          "type" : "keyword"
+        },
+        "id" : {
+          "type" : "keyword"
+        },
+        "last_login" : {
+          "type" : "date"
+        },
+        "password_hash" : {
+          "type" : "keyword"
+        },
+        "permissions" : {
+          "type" : "keyword"
+        },
+        "username" : {
+          "type" : "keyword"
+        }
+      }
+    }
+  }
+}
